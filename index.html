@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="sharp" data-ground="sand" data-buttons="pill" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muhammad Arifin: AI agent and Java backend engineer in Padang</title>
+<meta name="description" content="Portfolio of Muhammad Arifin with KedaiMbo, a point-of-sale SaaS for coffee shops with a Telegram AI agent, and an MCP server that writes ATS resumes.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muhammad Arifin: AI agent and Java backend engineer">
+<meta property="og:description" content="KedaiMbo, a point-of-sale SaaS with a Telegram AI agent, plus an MCP server that writes ATS resumes.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#111111">
+<!-- <link rel="canonical" href="https://[domain once chosen]/"> -->
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/ui/cards.css">
+<link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="/assets/layout/layout.css">
+<link rel="stylesheet" href="/assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #111111; --p-surface: #1c1c1c; --p-ink: #f2f2f2; --p-muted: #8f8f8f;
+  --p-accent: #a08672; --p-accent-ink: #111111; --p-action: #a08672; --p-action-ink: #111111;
+  --p-inv-bg: #f2f2f2; --p-inv-surface: #e0e0e0; --p-inv-ink: #111111; --p-inv-muted: #5c5c5c;
+  --p-inv-accent: #a08672; --p-inv-accent-ink: #111111; --p-inv-action: #a08672; --p-inv-action-ink: #111111;
+  --font-display: "Host Grotesk", system-ui, sans-serif;
+  --font-text: "Host Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.04em;
+}
+</style>
+<link rel="stylesheet" href="/assets/ui/base.css">
+<link rel="stylesheet" href="/assets/ui/window/fragment.css">
+<link rel="stylesheet" href="/assets/ui/chat/fragment.css">
+<link rel="stylesheet" href="/assets/ui/code/fragment.css">
+<link rel="stylesheet" href="/assets/ui/terminal-run/fragment.css">
+<link rel="stylesheet" href="/assets/diagrams/diagram.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="/assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="/assets/moments/moments.js">
+<link rel="modulepreload" href="/assets/moments/lib.js">
+<link rel="modulepreload" href="/assets/moments/counter-rolls/moment.js">
+<link rel="modulepreload" href="/assets/moments/liquid-hover/moment.js">
+<style>
+  /* app-frame (sections-library.md), used in the hero window and in #kedaimbo */
+  .app.ui { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); background: var(--u-bg); border: 1px solid var(--u-border); border-radius: var(--u-r); box-shadow: var(--u-shadow); }
+  #kedaimbo .app.ui { margin-top: var(--s-7); }
+  .app > .app__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+  .app > .app__pane + .app__pane { border-left: 1px solid var(--u-line); }
+  .app > .app__pane > .ui-panel { width: 100%; border: 0; border-radius: 0; box-shadow: none; }
+  .app > .app__pane::after { content: ""; position: absolute; inset: auto 0 0 0; height: 64px; background: linear-gradient(transparent, var(--u-bg)); pointer-events: none; }
+  @media (min-width: 1024px) and (max-width: 1279px) { .app.ui { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); } }
+  @media (max-width: 1023px) {
+    .app.ui { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+    .app > .app__pane--list { max-height: 252px; }
+    .app > .app__pane--list::after { display: none; }
+    .app .ui-win__side { display: none; }
+    .app .ui-win__body { grid-template-columns: minmax(0, 1fr); }
+    .app > .app__pane + .app__pane { border-left: 0; border-top: 1px solid var(--u-line); }
+  }
+  @media (max-width: 639px) {
+    .app.ui { grid-template-rows: minmax(0, 1fr); }
+    .app > .app__pane--list { display: none; }
+    .app > .app__pane + .app__pane { border-top: 0; }
+  }
+  .hero__window > .ly-piece.app.ui { height: 420px; }
+  @media (max-width: 1023px) { .hero__window > .ly-piece.app.ui { grid-template-rows: minmax(0, 1fr); } .hero__window .app__pane--list { display: none; } .hero__window .app__pane + .app__pane { border-top: 0; } }
+  /* the stack wall: eight 72px tiles across */
+  #stack .frame { padding: 0; }
+  .tools { width: 100%; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); padding: var(--s-7) 0; }
+  .tools li { display: grid; justify-items: center; gap: var(--s-3); text-align: center; }
+  .tools img { width: 72px; height: 72px; padding: 16px; border-radius: var(--r-md); background: #f2f2f2; }
+  @media (max-width: 1023px) { .tools { grid-template-columns: repeat(4, minmax(0, 1fr)); padding: var(--s-5) 0; } .tools img { width: 64px; height: 64px; padding: 14px; } }
+  .hero--centred .hero__lead { color: var(--ink); }
+  /* the terminal on the lit ground takes the light UI tokens, so its text reads on its own panel */
+  #backend .stats { grid-template-columns: 1fr 1fr; row-gap: var(--s-8); }
+  #mcp .ui { --fx-bg: #ffffff; --fx-surface: #f4f4f3; --fx-ink: #111111; --fx-muted: #5c5c5c; }
+  .hero__window .loop-pause:focus-visible { outline: 2px solid var(--p-bg); outline-offset: 0; box-shadow: 0 0 0 4px var(--p-ink); }
+  /* a phone shows the order list, since the Java lines are wider than the screen */
+  @media (max-width: 639px) {
+    #kedaimbo .app > .app__pane--list { display: block; max-height: none; }
+    #kedaimbo .app > .app__pane--open { display: none; }
+    .nav__actions [data-lang-toggle] { display: none; }
+    .tools .t-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+  /* the language switch sits beside the main button */
+  [data-lang-toggle] { background: none; border: 0; cursor: pointer; font: inherit; color: inherit; min-height: 44px; }
+</style>
+</head>
+<body>
+<!-- type: software (a person's portfolio, sold as an engineer of AI agents and Java backends)
+     deal: hero centred, nav nav-cards -> nav-centre (no photograph for each nav card), close close-type, footer footer-dark,
+           rhythm space, buttons pill, mark arc, grounds none, effect painterly-landscape in the hero window
+     palette lunar-grey-bronze: a near-black studio ground and grey ink taken from the black-and-white portrait, one warm bronze accent
+     type host (Host Grotesk + JetBrains Mono), radius sharp
+     moments: counter-rolls in #backend (the backend's real counts), liquid-hover on the portrait in #about -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top" data-i18n="skip">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="arc" aria-hidden="true"></span>Muhammad Arifin</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#kedaimbo"><span data-i18n="nav.work">Work</span> <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-4">
+              <p class="t-label">KedaiMbo</p>
+              <a href="#kedaimbo"><span data-i18n="menu.app">The app</span><span data-i18n="menu.app.l">Orders, payments and the kitchen</span></a>
+              <a href="#backend"><span data-i18n="menu.backend">The backend</span><span data-i18n="menu.backend.l">Spring Boot, PostgreSQL, tenants</span></a>
+              <a href="#agent"><span data-i18n="menu.agent">The agent</span><span data-i18n="menu.agent.l">Telegram, LangGraph and gRPC</span></a>
+            </div>
+            <div class="menu-col span-4">
+              <p class="t-label" data-i18n="menu.tools">Tools</p>
+              <a href="#mcp">cv-resume-builder<span data-i18n="menu.mcp.l">An MCP server for ATS resumes</span></a>
+              <a href="#stack"><span data-i18n="menu.stack">Stack</span><span data-i18n="menu.stack.l">What I build with every day</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#about" data-i18n="nav.about">Experience</a></div>
+      <div class="nav__item"><a class="nav__link" href="#stack" data-i18n="nav.stack">Stack</a></div>
+    </nav>
+    <div class="nav__actions">
+      <button class="nav__link" type="button" data-lang-toggle lang="id">Bahasa Indonesia</button>
+      <a class="btn btn--primary" href="/cv-muhammad-arifin.pdf" download><span data-i18n="cta">Download CV</span></a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--centred" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__c">
+        <a class="pill" href="#about"><span data-i18n="hero.pill">Open to work</span></a>
+        <h1 id="hero-h" aria-label="Muhammad Arifin, AI agent engineer" data-i18n-label="hero.h1"><span data-i18n="hero.h1">Muhammad Arifin, AI agent engineer</span></h1>
+        <p class="hero__lead" data-i18n="hero.lead">I build AI agents and the Java backends they read from. KedaiMbo, my point-of-sale app for coffee shops, runs on 70 REST endpoints.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/cv-muhammad-arifin.pdf" download><span data-i18n="cta">Download CV</span></a>
+          <a class="btn btn--secondary" href="#kedaimbo"><span data-i18n="hero.see">See KedaiMbo</span></a>
+        </div>
+      </div>
+      <div class="hero__window" data-fx="painterly-landscape" data-fx-seed="7" role="img" aria-label="The KedaiMbo Telegram bot answering a customer about a drink on the menu" data-i18n-label="hero.win">
+        <div class="ly-piece ui app" aria-hidden="true" data-ui-pause-host>
+          <div class="app__pane app__pane--list">
+            <div class="ui ui-panel ui-win" data-ui="window" data-ui-opts='{"compact":true}' data-open="New" data-work="Agent" data-done="Answered">
+              <div class="ui-win__bar">
+                <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ui-win__crumb"><img class="ui-brand" data-icon="telegram" src="/assets/icons/telegram.svg" alt="" width="16" height="16">KedaiMbo bot <i>/</i> <b>Chats</b></span>
+                <span class="ui-spacer"></span>
+              </div>
+              <div class="ui-win__body">
+                <div class="ui-win__main">
+                  <div class="ui-win__cols" aria-hidden="true"><span>Customer</span><span>Asked</span><span>Status</span><span>Age</span></div>
+                  <ul class="ui-win__rows">
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">RS</span><span class="ui-win__who">Rina S.</span><span class="ui-win__sub">Kopi susu gula aren?</span><span class="ui-win__st" data-st>New</span><span class="ui-win__age">1m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">DP</span><span class="ui-win__who">Dimas P.</span><span class="ui-win__sub">Pesanan meja 4?</span><span class="ui-win__st" data-st>New</span><span class="ui-win__age">3m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">AY</span><span class="ui-win__who">Ayu L.</span><span class="ui-win__sub">Ada croissant?</span><span class="ui-win__st is-done" data-st>Answered</span><span class="ui-win__age">9m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="2">FH</span><span class="ui-win__who">Fajar H.</span><span class="ui-win__sub">Sudah dibayar?</span><span class="ui-win__st is-done" data-st>Answered</span><span class="ui-win__age">14m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="5">NK</span><span class="ui-win__who">Nadia K.</span><span class="ui-win__sub">Less sugar bisa?</span><span class="ui-win__st is-done" data-st>Answered</span><span class="ui-win__age">22m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">BT</span><span class="ui-win__who">Bayu T.</span><span class="ui-win__sub">Matcha latte habis?</span><span class="ui-win__st is-done" data-st>Answered</span><span class="ui-win__age">31m</span></li>
+                    <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">SW</span><span class="ui-win__who">Sari W.</span><span class="ui-win__sub">Order saya siap?</span><span class="ui-win__st is-done" data-st>Answered</span><span class="ui-win__age">40m</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app__pane app__pane--open" data-ui-loop>
+            <div class="ui ui-panel ui-chat" data-ui="chat">
+              <div class="ui-head"><span class="ui-agent" aria-hidden="true"></span><div class="ui-title">KedaiMbo bot</div><span class="ui-chat__online">Online</span><span class="ui-spacer"></span></div>
+              <div class="ui-chat__body">
+                <div class="ui-chat__day">Hari ini, 09:41</div>
+                <div class="ui-msg ui-msg--me" data-chat-q><span class="ui-msg__text">Kopi susu gula aren masih ada? Bisa less sugar?</span></div>
+                <div class="ui-msg ui-msg--bot" data-chat-a>
+                  <span class="ui-agent ui-msg__av" aria-hidden="true"></span>
+                  <span class="ui-msg__col">
+                    <span class="ui-chat__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="ui-chat__answer">Masih ada, Kak. Pilihan gulanya <b>normal, less sugar atau tanpa gula</b>. Mau sekalian dipesan?</span>
+                    <span class="ui-chat__srcs"><span class="ui-chat__src"><svg class="ui-icon" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>GetCatalogItem</span></span>
+                  </span>
+                </div>
+              </div>
+              <div class="ui-chat__input"><span class="ui-chat__ph">Tulis pesan</span><span class="ui-chat__send" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M8 13V3.5M3.8 7.5 8 3.3l4.2 4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="kedaimbo" aria-labelledby="kedaimbo-h">
+    <div class="wrap">
+      <div class="grid">
+        <h2 class="span-5" id="kedaimbo-h" data-i18n="k.h">KedaiMbo, a point-of-sale app for coffee shops</h2>
+        <div class="span-6 start-7 stack-4">
+          <p data-i18n="k.p">The cashier takes the order, the customer pays first, then the kitchen prepares it. Every payment runs through a Spring Boot service like the one open below.</p>
+          <a class="link" href="https://github.com/finnn789/cashier-saas" data-i18n="k.link">Read the code on GitHub</a>
+        </div>
+      </div>
+      <div class="ui app fill" role="img" aria-label="The KedaiMbo order list beside the Java service that settles a payment" data-i18n-label="k.win" data-ui-pause-host>
+        <div class="app__pane app__pane--list">
+          <div class="ui ui-panel ui-win" data-ui="window" data-ui-still data-open="Unpaid" data-work="Paying" data-done="Paid">
+            <div class="ui-win__bar">
+              <span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ui-win__crumb">KedaiMbo <i>/</i> <b>Orders</b></span>
+              <span class="ui-spacer"></span>
+              <span class="ui-win__search" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><span class="ui-win__ph">Search</span><span class="ui-kbd">/</span></span>
+            </div>
+            <div class="ui-win__body">
+              <nav class="ui-win__side" aria-hidden="true">
+                <span class="ui-win__nav is-on">Orders<em>12</em></span>
+                <span class="ui-win__nav">Kitchen<em>4</em></span>
+                <span class="ui-win__nav">Tables</span>
+                <span class="ui-win__nav">Stock</span>
+                <span class="ui-win__label">Owner</span>
+                <span class="ui-win__nav">Audit log</span>
+                <span class="ui-win__nav">Reports</span>
+              </nav>
+              <div class="ui-win__main">
+                <div class="ui-win__cols" aria-hidden="true"><span>Table</span><span>Items</span><span>Status</span><span>Age</span></div>
+                <ul class="ui-win__rows">
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">T4</span><span class="ui-win__who">Table 4</span><span class="ui-win__sub">2 kopi susu, 1 croissant</span><span class="ui-win__st is-you" data-st>Paying</span><span class="ui-win__age">1m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">QR</span><span class="ui-win__who">QR order</span><span class="ui-win__sub">1 matcha latte</span><span class="ui-win__st" data-st>Unpaid</span><span class="ui-win__age">2m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">T2</span><span class="ui-win__who">Table 2</span><span class="ui-win__sub">1 americano</span><span class="ui-win__st is-done" data-st>Preparing</span><span class="ui-win__age">5m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="2">T7</span><span class="ui-win__who">Table 7</span><span class="ui-win__sub">3 es teh, 2 roti bakar</span><span class="ui-win__st is-done" data-st>Ready</span><span class="ui-win__age">8m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="5">TA</span><span class="ui-win__who">Takeaway</span><span class="ui-win__sub">2 kopi susu gula aren</span><span class="ui-win__st is-done" data-st>Completed</span><span class="ui-win__age">12m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="1">T1</span><span class="ui-win__who">Table 1</span><span class="ui-win__sub">1 cappuccino</span><span class="ui-win__st is-done" data-st>Completed</span><span class="ui-win__age">18m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="3">QR</span><span class="ui-win__who">QR order</span><span class="ui-win__sub">2 teh tarik</span><span class="ui-win__st is-done" data-st>Completed</span><span class="ui-win__age">25m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="4">T5</span><span class="ui-win__who">Table 5</span><span class="ui-win__sub">1 v60, 1 brownies</span><span class="ui-win__st is-done" data-st>Completed</span><span class="ui-win__age">31m</span></li>
+                  <li class="ui-win__row" data-row><span class="ui-avatar" data-tone="2">TA</span><span class="ui-win__who">Takeaway</span><span class="ui-win__sub">4 es kopi</span><span class="ui-win__st is-done" data-st>Completed</span><span class="ui-win__age">40m</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app__pane app__pane--open" data-ui-loop>
+          <div class="ui ui-panel ui-code" data-ui="code">
+            <div class="ui-code__tabs">
+              <span class="ui-code__tab is-on"><i class="ui-code__lang">J</i>FnbPaymentService.java</span>
+              <span class="ui-code__tab"><i class="ui-code__lang">J</i>SalesOrderEntity.java</span>
+              <span class="ui-spacer"></span>
+              <span class="ui-chip ui-chip--plain ui-code__chip" data-code-chip>Table 4</span>
+            </div>
+            <pre class="ui-code__pre"><code><span class="ui-code__ln" data-n="41"><span class="k">@Transactional</span></span>
+<span class="ui-code__ln" data-n="42"><span class="k">public</span> PaymentView <span class="f">pay</span>(TenantPrincipal p, UUID orderId,</span>
+<span class="ui-code__ln" data-n="43">                       PayRequest req, String key) {</span>
+<span class="ui-code__ln is-mark" data-n="44">  tenants.<span class="f">lockTenant</span>(p.tenantId());</span>
+<span class="ui-code__ln" data-n="45" data-note="Same key, same request: returns the first payment.">  <span class="k">var</span> done = payments.<span class="f">findByKey</span>(p.tenantId(), key);</span>
+<span class="ui-code__ln" data-n="46">  <span class="k">if</span> (done.<span class="f">isPresent</span>()) <span class="k">return</span> <span class="f">replayOrConflict</span>(done, req);</span>
+<span class="ui-code__ln" data-n="47">  <span class="k">var</span> order = guard.<span class="f">requireUnpaid</span>(p, orderId);</span>
+<span class="ui-code__ln" data-n="48" data-note="NEW and UNPAID become CONFIRMED and PAID.">  <span class="k">var</span> payment = order.<span class="f">settle</span>(req.method(), req.amount());</span>
+<span class="ui-code__ln" data-n="49">  stock.<span class="f">consumeForPaidOrder</span>(order);</span>
+<span class="ui-code__ln" data-n="50">  audit.<span class="f">record</span>(<span class="n">PAYMENT</span>, order, payment);</span>
+<span class="ui-code__ln" data-n="51">  <span class="k">return</span> payments.<span class="f">save</span>(payment, key, <span class="f">sha256</span>(req));</span>
+<span class="ui-code__ln" data-n="52">}</span>
+<span class="ui-code__ln" data-n="53"></span>
+<span class="ui-code__ln" data-n="54"><span class="c">// the kitchen hears about it only after commit</span></span>
+<span class="ui-code__ln" data-n="55"><span class="k">@TransactionalEventListener</span>(phase = <span class="n">AFTER_COMMIT</span>)</span>
+<span class="ui-code__ln" data-n="56"><span class="k">void</span> <span class="f">onPaid</span>(OrderPaid e) { realtime.<span class="f">push</span>(e); }</span></code></pre>
+            <div class="ui-code__hint" data-code-hint><span class="ui-dot"></span><span data-code-text>Locks the tenant row: two cashiers wait their turn.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="backend" aria-labelledby="backend-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5">
+          <h2 id="backend-h" data-i18n="b.h">The KedaiMbo backend in numbers</h2>
+          <ul class="rows" style="margin-top: var(--s-7)">
+            <li><span class="rows__name" data-i18n="b.r1">Takes each payment once</span><p data-i18n="b.r1p">A retry with the same Idempotency-Key replays the first payment.</p></li>
+            <li><span class="rows__name" data-i18n="b.r2">Keeps each shop’s data apart</span><p data-i18n="b.r2p">The tenant comes from the signed token. Another shop’s record answers 404.</p></li>
+            <li><span class="rows__name" data-i18n="b.r4">Settles in one transaction</span><p data-i18n="b.r4p">The payment, its audit entry and the table are written together or not at all.</p></li>
+            <li><span class="rows__name" data-i18n="b.r3">Rotates every refresh token</span><p data-i18n="b.r3p">Stored as a SHA-256 digest. A reused token ends the session.</p></li>
+          </ul>
+        </div>
+        <div class="span-6 start-7 stats" data-moment="counter-rolls">
+          <div class="stat"><p class="t-stat">70</p><p class="t-small muted" data-i18n="b.s1">REST endpoints in 20 controllers</p></div>
+          <div class="stat"><p class="t-stat">3</p><p class="t-small muted" data-i18n="b.s2">staff roles</p></div>
+          <div class="stat"><p class="t-stat">5</p><p class="t-small muted" data-i18n="b.s3">Flyway migrations</p></div>
+          <div class="stat"><p class="t-stat">15</p><p class="t-small muted" data-i18n="b.s4">minutes per access token</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="agent" aria-labelledby="agent-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <h2 class="span-5" id="agent-h" data-i18n="a.h">A Telegram agent that reads KedaiMbo over gRPC</h2>
+        <p class="span-6 start-7" data-i18n="a.p">Customers ask the bot about the menu or their order. A Python service on FastAPI and LangGraph calls two read-only gRPC methods on the Spring Boot backend.</p>
+      </div>
+      <div class="frame frame--hero" data-visual style="margin-top: var(--s-7); --ratio: 24%">
+        <div class="dg" data-diagram data-dg-still><script type="application/json">{"layout":"lanes","ground":"none","alt":"A customer message on Telegram goes to the LangGraph agent, which reads a catalog item and an order status from the Java backend over gRPC and sends the reply.","input":{"label":"Chat","icon":"telegram","sub":"Telegram"},"core":{"label":"Agent","icon":"ui:bot"},"lanes":[{"label":"Menu item","icon":"spring","done":true,"sub":"gRPC"},{"label":"Order status","icon":"spring","done":true,"sub":"gRPC"},{"label":"Reply sent","icon":"telegram","done":true,"sub":"Chat"}]}</script></div>
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <p class="span-4" data-i18n="a.f1">The model never sees tenant_id. The server adds it to every tool call.</p>
+        <p class="span-4" data-i18n="a.f2">Each call carries a service key, compared in constant time.</p>
+        <p class="span-4" data-i18n="a.f3">Next for the owner: stock forecasts and daily profit in the same chat.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mcp" aria-labelledby="mcp-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5 stack-4">
+          <h2 id="mcp-h" data-i18n="m.h">cv-resume-builder, an MCP server for ATS resumes</h2>
+          <p class="t-lead" data-i18n="m.p">A Node.js server that Claude Code calls to turn a profile into a one-column A4 resume. It writes the .docx and the PDF, then checks the file before it ships.</p>
+          <ul class="rows">
+            <li><span class="rows__name" data-i18n="m.n1">One column</span><p data-i18n="m.n1p">No tables or pictures for the ATS to trip on.</p></li>
+            <li><span class="rows__name" data-i18n="m.n2">Checked input</span><p data-i18n="m.n2p">Markup and stray bullets are refused.</p></li>
+            <li><span class="rows__name" data-i18n="m.n3">Two languages</span><p data-i18n="m.n3p">Section titles in Indonesian or English.</p></li>
+            <li><span class="rows__name" data-i18n="m.n4">.docx and PDF</span><p data-i18n="m.n4p">Arial, A4, margins from a preset.</p></li>
+          </ul>
+        </div>
+        <div class="frame frame--split frame--lit span-6 start-7" data-visual style="--ratio: 84%">
+          <div class="stage"><div class="at-rise fit" style="--fit-max:560px;--ax:max(32px, 50% - 280px);--ay:32px;--ay-sm:24px">
+          <div class="ui ui-panel ui-term" data-ui="terminal-run" data-ui-still role="img" aria-label="cv-resume-builder running its four tools and writing the resume as a Word file and a PDF" data-i18n-label="m.win">
+            <div class="ui-term__head"><span class="ui-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="ui-term__title">cv-resume-builder</span><span class="ui-meta">MCP</span><span class="ui-spacer"></span></div>
+            <div class="ui-term__screen" data-term-screen>
+              <div class="ui-term__track" data-term-track>
+                <div class="ui-term__ln ui-term__cmd"><span class="ui-term__cwd">cv-resume-builder</span><span class="ui-term__sig">$</span><span class="ui-term__typed" data-term-cmd>claude</span></div>
+                <div class="ui-term__ln ui-term__meter" data-term-out data-term-meter><span class="ui-term__bar" style="--p:1"><i></i></span><span class="ui-term__count" data-term-count>4 of 4 tools</span></div>
+                <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">get_resume_guide</span><span class="ui-term__n">layout rules</span></div>
+                <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">create_resume_from_markdown</span><span class="ui-term__n">cv.md</span></div>
+                <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">create_resume</span><span class="ui-term__n">.docx + .pdf</span></div>
+                <div class="ui-term__ln ui-term__log" data-term-out data-term-step><svg class="ui-term__tick" viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.4 2.8 2.8 6.2-6.4"/></svg><span class="ui-term__path">verify_resume</span><span class="ui-term__n">A4, one column</span></div>
+                <div class="ui-term__ln ui-term__gap" data-term-out aria-hidden="true"></div>
+                <div class="ui-term__ln ui-term__sum" data-term-out><span class="ui-term__key">Files</span><span class="ui-term__val">.docx, .pdf</span></div>
+                <div class="ui-term__ln ui-term__done" data-term-out data-term-done><span class="ui-term__ok"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4.5 8.3 2.4 2.4 4.6-5"/></svg></span><b>Done</b><span class="ui-term__dim">CV_ATS_MUHAMMAD_ARIFIN.pdf</span></div>
+                <div class="ui-term__ln ui-term__cmd" data-term-next><span class="ui-term__cwd">cv-resume-builder</span><span class="ui-term__sig">$</span><span class="ui-term__typed"></span><i class="ui-term__caret" aria-hidden="true"></i></div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <div class="grid grid--top">
+        <div class="span-5">
+          <h2 id="about-h"><span data-i18n="ab.h">Work and study.</span> <span class="muted" data-i18n="ab.h2">Frontend first, now backend and agents.</span></h2>
+          <ul class="rows" style="margin-top: var(--s-7)">
+            <li><span class="rows__name" data-i18n="ab.r1">Frontend Engineer, PT Andalas Petroleum Services</span><span class="rows__value muted" data-i18n="ab.r1d">2024 to 2025</span><p data-i18n="ab.r1p">A drilling-operations portal between SKK Migas and oil and gas contractors: multi-step well forms, AG Grid tables, Plotly charts and Leaflet maps in React 18.</p></li>
+            <li><span class="rows__name" data-i18n="ab.r2">Freelance web developer</span><span class="rows__value muted" data-i18n="ab.r2d">2023 to 2024</span><p data-i18n="ab.r2p">Websites in React, Next.js and Laravel, from the first requirements to handover.</p></li>
+            <li><span class="rows__name" data-i18n="ab.r3">Informatics degree, UPI YPTK Padang</span><span class="rows__value muted" data-i18n="ab.r3d">GPA 3.38</span><p data-i18n="ab.r3p">Thesis: predicting a stock index from Yahoo Finance news with FinBERT sentiment and an LSTM.</p></li>
+          </ul>
+        </div>
+        <figure class="frame frame--photo span-6 start-7" style="--ratio: 100%; margin: 0" data-moment="liquid-hover" data-moment-opts='{"strength": 0.8}'>
+          <img class="frame__img" src="/img/arifin-square.jpg" alt="Muhammad Arifin in a black blazer and aviator sunglasses, black and white studio portrait" data-i18n-alt="ab.alt" width="768" height="768" loading="lazy" data-source="client" data-subject="portrait">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="stack" aria-labelledby="stack-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="stack-h"><span data-i18n="s.h">The stack I ship with.</span> <span class="muted" data-i18n="s.h2">Java and Python on the server, React on the screen.</span></h2>
+        <p data-i18n="s.p">I plan and review with Claude Code and Codex, and every change still goes through tests and review before it is merged.</p>
+      </div>
+      <div class="frame" data-visual role="img" aria-label="Java, Spring Boot, PostgreSQL, Docker, GitHub Actions, Python, FastAPI, LangChain, Telegram bots, React, TypeScript, Vite, Next.js, Claude Code, Codex and Git" data-i18n-label="s.win" style="margin-top: var(--s-7)">
+        <ul class="tools" aria-hidden="true">
+          <li><img data-icon="java" src="/assets/icons/java.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Java</span></li>
+          <li><img data-icon="spring" src="/assets/icons/spring.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Spring Boot</span></li>
+          <li><img data-icon="postgres" src="/assets/icons/postgres.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">PostgreSQL</span></li>
+                    <li><img data-icon="docker" src="/assets/icons/docker.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Docker</span></li>
+          <li><img data-icon="github-actions" src="/assets/icons/github-actions.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">GitHub Actions</span></li>
+          <li><img data-icon="python" src="/assets/icons/python.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Python</span></li>
+          <li><img data-icon="fastapi" src="/assets/icons/fastapi.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">FastAPI</span></li>
+          <li><img data-icon="langchain" src="/assets/icons/langchain.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">LangChain</span></li>
+          <li><img data-icon="telegram" src="/assets/icons/telegram.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Telegram bots</span></li>
+          <li><img data-icon="react" src="/assets/icons/react.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">React</span></li>
+          <li><img data-icon="typescript" src="/assets/icons/typescript.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">TypeScript</span></li>
+          <li><img data-icon="vitejs" src="/assets/icons/vitejs.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Vite</span></li>
+          <li><img data-icon="nextjs" src="/assets/icons/nextjs.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Next.js</span></li>
+          <li><img data-icon="claude-code" src="/assets/icons/claude-code.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Claude Code</span></li>
+          <li><img data-icon="openai" src="/assets/icons/openai.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Codex</span></li>
+          <li><img data-icon="git" src="/assets/icons/git.svg" alt="" width="72" height="72" loading="lazy"><span class="t-label">Git</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h" data-i18n="c.h">Get my CV as a PDF</h2>
+        <p data-i18n="c.p">Based in Padang. Open to remote work or moving to Jakarta.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="/cv-muhammad-arifin.pdf" download><span data-i18n="cta">Download CV</span><svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-6 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="arc" aria-hidden="true"></span>Muhammad Arifin</a>
+          <p class="footer__lede" data-i18n="f.lede">Software engineer for AI agents and Java backends.</p>
+        </div>
+        <div class="span-2 footer__col"><h3 data-i18n="nav.work">Work</h3><ul><li><a href="#kedaimbo">KedaiMbo</a></li><li><a href="#agent" data-i18n="f.agent">Telegram agent</a></li><li><a href="#mcp">cv-resume-builder</a></li></ul></div>
+        <div class="span-2 footer__col"><h3 data-i18n="f.profile">Profile</h3><ul><li><a href="#about" data-i18n="nav.about">Experience</a></li><li><a href="#stack" data-i18n="nav.stack">Stack</a></li></ul></div>
+        <div class="span-2 footer__col"><h3 data-i18n="f.contact">Contact</h3><ul><li><a href="mailto:aripstar47@gmail.com">Email</a></li><li><a href="https://www.linkedin.com/in/muhammad-arifin-8881b7313">LinkedIn</a></li><li><a href="https://github.com/finnn789">GitHub</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Muhammad Arifin</span>
+        <button class="link" type="button" data-lang-toggle lang="id">Bahasa Indonesia</button>
+        <span class="muted" data-i18n="f.tm">Product names and logos are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="/cv-muhammad-arifin.pdf" download><span data-i18n="cta">Download CV</span></a>
+</nav>
+
+<script type="module" src="/assets/system.js"></script>
+<script type="module" src="/assets/motion/motion.js"></script>
+<script type="module" src="/assets/layout/layout.js"></script>
+<script type="module" src="/assets/diagrams/mount.js"></script>
+<script type="module" src="/lang.js"></script>
+</body>
+</html>
